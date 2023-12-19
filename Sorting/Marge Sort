@@ -1,1 +1,38 @@
-
+import java.util.Arrays;
+public class Solution {
+    
+    public static int [] merge_sort(int [] input) {
+        int n = input.length;
+        if(n <= 1){
+            return input; 
+        }
+        int mid = n/2;
+        int [] left_list = merge_sort(Arrays.copyOfRange(input, 0, mid));
+        int [] right_list = merge_sort(Arrays.copyOfRange(input, mid, n));
+        return merge(left_list, right_list);
+    }
+    
+    public static int [] merge(int [] left_list, int [] right_list) {
+        int ll = left_list.length;
+        int rl = right_list.length;
+        int [] res = new int[ll + rl];
+        int lp = 0, rp = 0, resp = 0;
+        
+        while(lp < ll && rp < rl){
+            if(left_list[lp] < right_list[rp]){
+                res[resp++] = left_list[lp++];
+            }else{
+                res[resp++] = right_list[rp++];
+            }
+        }
+        
+        //remain list
+        while(lp < ll){
+            res[resp++] = left_list[lp++];
+        }
+        while(rp < rl){
+            res[resp++] = right_list[rp++];
+        }
+        return res;
+    }
+}
