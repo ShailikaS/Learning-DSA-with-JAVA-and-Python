@@ -1,0 +1,36 @@
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        ListNode fp = head,
+                 sp = head;
+        
+        while(fp != null && fp.next != null){
+            fp = fp.next.next;
+            sp = sp.next;
+            
+            if(sp == fp)break;
+        }
+        
+        //Base case
+        if(fp == null || fp.next == null)return null;
+        
+        while(head != sp){
+            head = head.next;
+            sp = sp.next;
+        }
+        return head;
+      }
+}
+
+//TC : O(N);
+//SC : O(1);
+
+/*
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
